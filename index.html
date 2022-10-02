@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code quiz</title>
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <section class ="banner">
+        <div class ="bannerContent">
+            <button class="btns">View High Scores</button>
+            <div id="timmer">Time left: <span id="time"></span></div>
+        </div>
+    </section>
+    <section class="quizContainer">
+        <div id="quizBox">
+            <!-- To many divs? is it better to hide and show divs or just crate elements in JS? -->
+            <div id="questions" class="">
+                <h1 id="titleQuestions" class="">Coding Quiz Challenge</h1>
+                <p id="smallText" class=""></p>
+            </div>
+            <div id="optionsBtns" class="hide">
+                <ol>
+                    <li><button id="option1" class="btns">Option 1</button></li>
+                    <li><button id="option2" class="btns">Option 2</button></li>
+                    <li><button id="option3" class="btns">Option 3</button></li>
+                    <li><button id="option4" class="btns">Option 4</button></li>
+                </ol>
+            </div>
+            <div id="submit" class="">
+                <label for="Initials">Type your Initials here:</label>
+                <input id="Initials" type="text">
+                <button id="submitBtn" class="btns">Submit</button>
+            </div>
+            <div id="validate"class></div>
+            <div id="reset" class=""></div>
+        </div>
+    </section>
+    <script src="./assets/script/script.js"></script>
+</body>
+</html>
