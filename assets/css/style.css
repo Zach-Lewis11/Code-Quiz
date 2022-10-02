@@ -75,6 +75,19 @@ body {
     transform: scale(1.03);
 }
 
+#start {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10;
+}
+
+#startBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5;
+}
+
 #optionsBtns {
     padding: 5;
 }

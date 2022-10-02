@@ -1,6 +1,6 @@
 
 // timer related variables 
-var timeEl = document.querySelector("#time");
+const timeEl = document.querySelector("#time");
 var secondsLeft = 75;
 
 // variables for answer options, using const because we don't want the values to change
@@ -95,12 +95,23 @@ console.log(mainArr[0].question)
 console.log(mainArr[0].ans1)
 console.log(mainArr[0].ans1.includes(true))
 console.log(mainArr[0].ans2.includes(true))
+console.log(mainArr[0].ans2[0])
+
 
 //make a function for gameplay loop
 //function needs to start when 'start' button is clicked
 
 function gamePlay() {
-  
+  var question =document.querySelector("#titleQuestions")
+  var op1 =document.querySelector("#option1")
+  var op2 =document.querySelector("#option2")
+  var op3 =document.querySelector("#option3")
+  var op4 =document.querySelector("#option4")
+  //make a function to go through each questionObj in order and populate the correct fields in the html with the corresponding values from the object
+  do {
+
+  } while (secondsLeft > 0 || i < mainArr.length)
+
 }
 
 //timer function to count down from 75, stops at zero
