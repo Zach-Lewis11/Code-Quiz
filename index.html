@@ -10,7 +10,7 @@
 <body>
     <section class ="banner">
         <div class ="bannerContent">
-            <button class="btns">View High Scores</button>
+            <button id="highScores" class="btns">View High Scores</button>
             <div id="timmer">Time left: <span id="time"></span></div>
         </div>
     </section>
@@ -19,7 +19,7 @@
             <!-- To many divs? is it better to hide and show divs or just crate elements in JS? -->
             <div id="questions" class="">
                 <h1 id="titleQuestions" class="">Coding Quiz Challenge</h1>
-                <p id="smallText" class=""></p>
+                <p id="smallText"></p>
             </div>
             <div id="optionsBtns" class="hide">
                 <ol>
@@ -29,15 +29,17 @@
                     <li><button id="option4" class="btns">Option 4</button></li>
                 </ol>
             </div>
-            <div id="submit" class="">
+            <div id="leaderBoard" class="hide">
+                <ol id="scores"></ol>
+            </div>
+            <div id="submit" class="hide">
                 <label for="Initials">Type your Initials here:</label>
                 <input id="Initials" type="text">
                 <button id="submitBtn" class="btns">Submit</button>
             </div>
-            <div id="start"class="hiddenStart">
-                <button id="startBtn" class="btns">Would you Like to start the quiz?</button>
+            <div id="start" class="hide">
+                <button id="startBtn" class="btns hide">Would you Like to start the quiz?</button>
             </div>
-            <div id="reset" class="hiddenEnd"></div>
         </div>
     </section>
     <script src="./assets/script/script.js"></script>

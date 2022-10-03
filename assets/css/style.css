@@ -101,3 +101,11 @@ body {
     text-align: center;
     align-items: center;
 }
+
+.hide {
+    display: none;
+}
+
+.hidden {
+    visibility: hidden;
+}
