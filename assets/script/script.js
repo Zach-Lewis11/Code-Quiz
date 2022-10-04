@@ -1,14 +1,28 @@
 
-// timer related variables 
 const timeEl = document.querySelector("#time");
 var secondsLeft = 76;
+var score = 0;
+var scores= document.getElementById("scores")
+if (!localStorage.players) {
+    localStorage.setItem("players", 0)
+}
 const startBtn = document.getElementById("startBtn");
 startBtn.addEventListener("click", startGame);
 // const viewHS = document.querySelector("highScores");
 // viewHS.addEventListener("click", openHighScores)
-// const leaderBoard = document.getElementById("leaderBoard")
+ const leaderBoard = document.getElementById("leaderBoard")
 
+var questionNum = 0;
+var quest =document.querySelector("#titleQuestions");
 const choiceContainerEl = document.getElementById("optionsBtns");
+const choice1 = document.querySelector('#option1');
+const choice2 = document.querySelector('#option2');
+const choice3 = document.querySelector('#option3');
+const choice4 = document.querySelector('#option4');
+choice1.addEventListener('click', checkAnswer)
+choice2.addEventListener('click', checkAnswer)
+choice3.addEventListener('click', checkAnswer)
+choice4.addEventListener('click', checkAnswer)
 
 // variables for answer options, using const because we don't want the values to change
 
@@ -90,76 +104,152 @@ let questionObj6 = {
 
 //make main array to hold all the objects so the game function and logically work through them
 
-const mainArr = [questionObj1, questionObj2, questionObj3, questionObj4, questionObj5, questionObj6]
+var mainArr = [questionObj1, questionObj2, questionObj3, questionObj4, questionObj5, questionObj6]
 
-console.log(mainArr);
-console.log(mainArr[0].question);
-console.log(mainArr[0].ans1);
-console.log(mainArr[0].ans1.includes(true));
-console.log(mainArr[0].ans2.includes(true));
-console.log(mainArr[0].ans2[0]);
+
+// console.log(mainArr);
+// console.log(mainArr[0].question);
+// console.log(mainArr[0].ans1);
+// console.log(mainArr[0].ans1.includes(true));
+// console.log(mainArr[0].ans2.includes(true));
+// console.log(mainArr[0].ans2[0]);
 
 
 //function needs to start when 'start' button is clicked
 
 function startGame() {
     setTime();
-    // gamePlay()
     startBtn.classList.add("hidden");
-    choiceContainerEl.classList.remove("hide")
-    loadNextCard();
+    choiceContainerEl.classList.remove("hide");
+    loadNextCard(questionNum);
+    scores.children.remove
+    
 };
+
 
 //make a function for gameplay loop
+//make a function to go through each questionObj in order and populate the correct fields in the html with the corresponding values from the object
 
-function gamePlay() {
-  var question =document.querySelector("#titleQuestions");
-  var op1 =document.querySelector("#option1");
-  var op2 =document.querySelector("#option2");
-  var op3 =document.querySelector("#option3");
-  var op4 =document.querySelector("#option4");
-  //make a function to go through each questionObj in order and populate the correct fields in the html with the corresponding values from the object
-  //do {} while (secondsLeft > 0 || i < mainArr.length);
-
+function checkAnswer(event) {
+    // need to compare two things, one is the index of the button picked, 2 is if the equals the true/false of main array
+    console.log(event.target.getAttribute("id"));
+    var myString = event.target.getAttribute("id");
+    var myIndex = parseInt(myString.slice(-1))-1 ;
+    //myobj[Object.keys(myobj)[0]];
+    var answerKeys = Object.keys(mainArr[questionNum]);
+    answerKeys =answerKeys.slice(1)
+    var myNewKey = answerKeys[myIndex]
+    console.log(myNewKey)
+    console.log(mainArr[questionNum][myNewKey])
+    console.log(mainArr[questionNum][myNewKey].includes(true))
+    if (mainArr[questionNum][myNewKey].includes(false)) {
+        secondsLeft -= 15;
+    }
+    questionNum++;
+    loadNextCard(questionNum);
 };
 
-function loadNextCard(){
+function gameOver(){
+    // clear contents on page
+    // establish score
+    // show rest of scores
+    // ask if player wants to play again
+    startBtn.classList.remove("hidden");
+    choiceContainerEl.classList.add("hide");
+    leaderBoard.classList.remove("hide");
+    quest.innerHTML = "Score Board";
+    startBtn.innerHTML = "Would you like to play again?"
+    var formEl=document.getElementById("submit");
+    formEl.classList.remove("hide")
+    var initials = prompt("PLease Enter Name or Initials")
+    score = secondsLeft
+    localStorage.setItem(initials, score)
+    localStorage.players++;
+    var scoreTable = []
+    for (var i = 0; i < localStorage.players; i++) {
+        // need to pull player initials and their score
+        if(!(localStorage.key(i)=== "players")){
+            //if the current local storage key is players, do nothing, else add local storage data to score table 
+            scoreTable.push([localStorage.key(i), localStorage.getItem(localStorage.key(i))]);
+        }
+    }
+    for (var i = 0; i < localStorage.players; i++) {
+        var newListel= document.createElement('li');
 
-    var question =document.querySelector("#titleQuestions");
+    }
+    questionNum=0
+    secondsLeft=76
+}
+
+function loadNextCard(x){
+
     var op1 =document.querySelector("#option1");
     var op2 =document.querySelector("#option2");
     var op3 =document.querySelector("#option3");
     var op4 =document.querySelector("#option4");
-    question.innerHTML = mainArr[0].question
-    op1.innerHTML = mainArr[0].ans1
-    op2.innerHTML = mainArr[0].ans2
-    op3.innerHTML = mainArr[0].ans3
-    op4.innerHTML = mainArr[0].ans4
-
+    quest.innerHTML = mainArr[x].question;
+    op1.innerHTML = mainArr[x].ans1[0];
+    op2.innerHTML = mainArr[x].ans2[0];
+    op3.innerHTML = mainArr[x].ans3[0];
+    op4.innerHTML = mainArr[x].ans4[0];
+    
 };
+
 //timer function to count down from 75, stops at zero
 //stopping at zero will end game
 // time left will equal the score to be submitted to leader boards 
 //timer should start when game starts not when page is loaded 
 
 function setTime() {
-  // Sets interval in variable
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timeEl.textContent = secondsLeft;
-
-    if(secondsLeft <= 0) {
-     clearInterval(timerInterval)
-    }
-
-  }, 1000);
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = secondsLeft;
+        
+        if(secondsLeft <= 0) {
+            clearInterval(timerInterval)
+        }
+        
+    }, 1000);
 }
 
+// a function to show the replay button and add the clear Scores button
 
 // a function for viewing the high scores
 
 // function openHighScores(){
-//     document.querySelector("#titleQuestions").innerText= "Previous Scores";
-//     leaderBoard.classList.remove("hide");
-   
-// };
+    //     document.querySelector("#titleQuestions").innerText= "Previous Scores";
+    //     leaderBoard.classList.remove("hide");
+    
+    // };
+
+
+
+//      GRAVE YARD
+
+
+    // function gamePlay() {
+    //   var question =document.querySelector("#titleQuestions");
+    //   var op1 =document.querySelector("#option1");
+    //   var op2 =document.querySelector("#option2");
+    //   var op3 =document.querySelector("#option3");
+    //   var op4 =document.querySelector("#option4");
+    //  do{ 
+    //     for(i = 0; i < mainArr.length; i++) {
+    //         loadNextCard(i);
+    //         console.log(i)
+    //     };
+    //     //  choiceBtns.addEventListener('click', myTempFunc);
+    //     // selectChoice(e){
+            
+    //     //}
+    
+    //      if (choice.includes(true) === false) {
+    //         secondsLeft = secondsLeft-10;
+    //     } 
+    //     i++;
+    //  } while (secondsLeft > 0 || i < mainArr.length);
+            
+    //  //
+    
+    // };
