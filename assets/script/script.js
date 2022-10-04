@@ -106,15 +106,6 @@ let questionObj6 = {
 
 var mainArr = [questionObj1, questionObj2, questionObj3, questionObj4, questionObj5, questionObj6]
 
-
-// console.log(mainArr);
-// console.log(mainArr[0].question);
-// console.log(mainArr[0].ans1);
-// console.log(mainArr[0].ans1.includes(true));
-// console.log(mainArr[0].ans2.includes(true));
-// console.log(mainArr[0].ans2[0]);
-
-
 //function needs to start when 'start' button is clicked
 
 function startGame() {
@@ -125,7 +116,6 @@ function startGame() {
     scores.children.remove
     
 };
-
 
 //make a function for gameplay loop
 //make a function to go through each questionObj in order and populate the correct fields in the html with the corresponding values from the object
@@ -145,18 +135,24 @@ function checkAnswer(event) {
     if (mainArr[questionNum][myNewKey].includes(false)) {
         secondsLeft -= 15;
     }
+    if (questionNum < mainArr.length-1){
     questionNum++;
+    console.log("if", questionNum)
     loadNextCard(questionNum);
+    } else {
+        gameOver();
+    };
+
 };
 
 function gameOver(){
     // clear contents on page
-    // establish score
-    // show rest of scores
-    // ask if player wants to play again
     startBtn.classList.remove("hidden");
     choiceContainerEl.classList.add("hide");
     leaderBoard.classList.remove("hide");
+    // ask if player wants to play again
+    // establish score
+    // show rest of scores
     quest.innerHTML = "Score Board";
     startBtn.innerHTML = "Would you like to play again?"
     var formEl=document.getElementById("submit");
@@ -196,7 +192,7 @@ function loadNextCard(x){
 };
 
 //timer function to count down from 75, stops at zero
-//stopping at zero will end game
+//seconds left zero should end game
 // time left will equal the score to be submitted to leader boards 
 //timer should start when game starts not when page is loaded 
 
@@ -213,43 +209,3 @@ function setTime() {
     }, 1000);
 }
 
-// a function to show the replay button and add the clear Scores button
-
-// a function for viewing the high scores
-
-// function openHighScores(){
-    //     document.querySelector("#titleQuestions").innerText= "Previous Scores";
-    //     leaderBoard.classList.remove("hide");
-    
-    // };
-
-
-
-//      GRAVE YARD
-
-
-    // function gamePlay() {
-    //   var question =document.querySelector("#titleQuestions");
-    //   var op1 =document.querySelector("#option1");
-    //   var op2 =document.querySelector("#option2");
-    //   var op3 =document.querySelector("#option3");
-    //   var op4 =document.querySelector("#option4");
-    //  do{ 
-    //     for(i = 0; i < mainArr.length; i++) {
-    //         loadNextCard(i);
-    //         console.log(i)
-    //     };
-    //     //  choiceBtns.addEventListener('click', myTempFunc);
-    //     // selectChoice(e){
-            
-    //     //}
-    
-    //      if (choice.includes(true) === false) {
-    //         secondsLeft = secondsLeft-10;
-    //     } 
-    //     i++;
-    //  } while (secondsLeft > 0 || i < mainArr.length);
-            
-    //  //
-    
-    // };
