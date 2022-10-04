@@ -113,7 +113,8 @@ function startGame() {
     startBtn.classList.add("hidden");
     choiceContainerEl.classList.remove("hide");
     loadNextCard(questionNum);
-    scores.children.remove
+    leaderBoard.classList.add("hide")
+    scores.removeChild(i)
     
 };
 
@@ -156,7 +157,7 @@ function gameOver(){
     quest.innerHTML = "Score Board";
     startBtn.innerHTML = "Would you like to play again?"
     var formEl=document.getElementById("submit");
-    formEl.classList.remove("hide")
+    // formEl.classList.remove("hide")
     var initials = prompt("PLease Enter Name or Initials")
     score = secondsLeft
     localStorage.setItem(initials, score)
@@ -172,8 +173,13 @@ function gameOver(){
     for (var i = 0; i < localStorage.players; i++) {
         var newListel= document.createElement('li');
 
+        scores.appendChild(newListel);
+
     }
     questionNum=0
+    
+        clearInterval(setTime)
+    
     secondsLeft=76
 }
 
@@ -202,7 +208,7 @@ function setTime() {
         secondsLeft--;
         timeEl.textContent = secondsLeft;
         
-        if(secondsLeft <= 0) {
+        if(secondsLeft <= 0 || mainArr.length === questionNum) {
             clearInterval(timerInterval)
         }
         
