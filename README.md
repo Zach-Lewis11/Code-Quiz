@@ -12,6 +12,6 @@ The main goal of this challenge was to use JavaScript to Create a small quiz abo
 To take the quiz, load page and click the start button. Then the first question will populate the screen, simply click on the awnser you would like to submit and the next card will automatically load. *NOTE* A wrong Awnser will remove 15 seconds from the timmer. When there is not time left or you awnser the question a prompt will ask you to input your intials and store your score *NOTE* score = time left on timmer.
 
 !(./assets/Screenshot 2022-10-04 223440.png)
-!(./assets/Screenshot 2022-10-04 
+!(./assets/Screenshot 2022-10-04 223516.png) 
 
 ## MIT License 
