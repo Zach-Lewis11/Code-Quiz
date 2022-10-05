@@ -114,7 +114,7 @@ function startGame() {
     choiceContainerEl.classList.remove("hide");
     loadNextCard(questionNum);
     leaderBoard.classList.add("hide")
-    scores.removeChild(i)
+    //gitscores.innerHTML= ''
     
 };
 
@@ -143,10 +143,13 @@ function checkAnswer(event) {
     } else {
         gameOver();
     };
+    if (secondsLeft <= 0 ){
+        gameOver();
+    }
 
 };
 
-function gameOver(){
+function gameOver(event){
     // clear contents on page
     startBtn.classList.remove("hidden");
     choiceContainerEl.classList.add("hide");
@@ -170,16 +173,16 @@ function gameOver(){
             scoreTable.push([localStorage.key(i), localStorage.getItem(localStorage.key(i))]);
         }
     }
+    console.log(scoreTable)
     for (var i = 0; i < localStorage.players; i++) {
         var newListel= document.createElement('li');
+        newListel.innerHTML= scoreTable[i]
 
         scores.appendChild(newListel);
 
     }
     questionNum=0
-    
-        clearInterval(setTime)
-    
+    clearInterval(setTime)
     secondsLeft=76
 }
 
@@ -208,7 +211,7 @@ function setTime() {
         secondsLeft--;
         timeEl.textContent = secondsLeft;
         
-        if(secondsLeft <= 0 || mainArr.length === questionNum) {
+        if(secondsLeft <= 0) {
             clearInterval(timerInterval)
         }
         
